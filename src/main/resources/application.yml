@@ -1,0 +1,29 @@
+# Basic Configuration
+spring:
+  application:
+    name: spring-aop-logging-demo
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    io.github.yourname: DEBUG
+    performance: INFO
+  
+  # Performance monitoring settings
+  performance:
+    slow-threshold-ms: 1000  # Methods slower than 1 second are logged as SLOW
+  
+  # Request logging settings
+  request:
+    log-headers: false       # Set true to log HTTP headers
+    log-body: false          # Set true to log request bodies
+  
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} [%X{requestId}] [%X{userId}] - %msg%n"
+
+# Enable AOP
+spring.aop:
+  auto: true
+  proxy-target-class: true
