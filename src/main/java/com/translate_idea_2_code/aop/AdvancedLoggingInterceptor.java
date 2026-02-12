@@ -61,14 +61,23 @@ public class AdvancedLoggingInterceptor {
     @Value("${logging.request.log-body:false}")
     private boolean logRequestBody;
 
+    /**
+     * Creates the interceptor with a default Jackson mapper for structured logs.
+     */
     public AdvancedLoggingInterceptor() {
         this.objectMapper = new ObjectMapper();
     }
 
+    /**
+     * Matches methods declared in classes annotated with {@code @RestController}.
+     */
     @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
     public void restControllerMethods() {
     }
 
+    /**
+     * Matches methods declared in classes annotated with {@code @Service}.
+     */
     @Pointcut("within(@org.springframework.stereotype.Service *)")
     public void serviceMethods() {
     }
@@ -348,6 +357,12 @@ public class AdvancedLoggingInterceptor {
         }
     }
 
+    /**
+     * Extracts the simple class name from a fully qualified class name.
+     *
+     * @param fullClassName fully qualified class name
+     * @return simple class name
+     */
     private String getSimpleClassName(String fullClassName) {
         return fullClassName.substring(fullClassName.lastIndexOf('.') + 1);
     }
